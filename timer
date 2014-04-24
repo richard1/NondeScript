@@ -1,0 +1,12 @@
+#!/bin/bash
+
+sleep $1
+
+shift
+
+while [ -n "$1" ]; do
+   MSG="$MSG $1"
+   shift
+done
+paplay /usr/share/sounds/ubuntu/stereo/dialog-question.ogg &
+echo "message:$MSG" | zenity --notification --listen --timeout=1 &
