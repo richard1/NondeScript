@@ -9,7 +9,7 @@ if not sys.stdin.isatty():
     for line in sys.stdin:
         shows = shows + [line]
 
-if len(shows)  == 0:
+if len(shows) == 0:
     print "At least one show required"
     print "USAGE: " + sys.argv[0] + " [SHOW] ..."
     sys.exit()

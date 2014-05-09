@@ -1,0 +1,11 @@
+#!/bin/bash
+
+cond=$(curl -s 'http://weather.yahooapis.com/forecastrss?w=2434245&u=f' | grep "yweather:condition")
+
+text=${cond##*text=\"}
+text=${text%%\"*}
+
+temp=${cond##*temp=\"}
+temp=${temp%%\"*}
+
+echo "$temp°  $text"
