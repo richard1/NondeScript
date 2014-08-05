@@ -8,4 +8,10 @@ text=${text%%\"*}
 temp=${cond##*temp=\"}
 temp=${temp%%\"*}
 
-echo "$temp°  $text"
+battery=`upower -i /org/freedesktop/UPower/devices/battery_BAT0 | grep percentage | cut -d : -f 2 | tr -d ' '`
+
+if [ -z "$temp" ]; then
+    echo "$battery"
+else
+    echo "$temp°  $text  ($battery)"
+fi
