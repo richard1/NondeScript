@@ -1,0 +1,20 @@
+#!/bin/bash
+
+isJacked=`amixer -c 0 cget numid=22,iface=CARD | awk -F"=" 'NR == 3 {print $2;}'`
+
+while true; do
+    currJacked=$(amixer -c 0 cget numid=22,iface=CARD | awk -F"=" 'NR == 3 {print $2;}')
+    if [ "$currJacked" != "$isJacked" ]; then
+        if [ $currJacked == "off" ]; then
+            amixer -q -D pulse sset Master mute
+            echo "muted"
+        else
+            # up to the user if he/she wants to unmute when plugin, or do nothing
+            # uncomment the line below for unmute
+            # amixer -q -D pulse sset Master unmute
+            echo "unmuted"
+        fi
+    fi
+    isJacked=$currJacked
+    sleep 0.05
+done
