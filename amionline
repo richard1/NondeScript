@@ -1,0 +1,12 @@
+#!/bin/bash
+
+killall notify-osd 2> /dev/null
+
+wget -q --tries=10 --timeout=20 -O /dev/null http://google.com &> /dev/null
+if [[ $? -eq 0 ]]; then
+        :
+else
+        notify-send "Offline" -t 100
+fi
+
+sleep 2 && killall notify-osd &> /dev/null
